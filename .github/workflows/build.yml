@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -17,11 +20,12 @@ jobs:
         shell: cmd
         run: build-release.bat
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: CPEManager-win-x64
-          path: |
-            CPEManager.exe
-            CpeContractRate.dll
-          if-no-files-found: error
+      - name: Create release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sha="${GITHUB_SHA::10}"
+          gh release create "build-${GITHUB_RUN_NUMBER}" CPEManager.exe CpeContractRate.dll \
+            --title "Build ${GITHUB_RUN_NUMBER} (${sha})" \
+            --notes "Automated build from commit ${sha}."
