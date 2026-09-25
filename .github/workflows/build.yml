@@ -23,15 +23,15 @@ jobs:
       - name: Unit tests
         shell: cmd
         run: |
-          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\ControlMessageParsingTest.cpp /Fe:tests\ControlMessageParsingTest.exe || exit /b 1
+          cl /nologo /utf-8 /std:c++17 /EHsc /I . /I packages\webview2\build\native\include tests\ControlMessageParsingTest.cpp CpeProtocol.cpp /link packages\webview2\build\native\x64\WebView2LoaderStatic.lib User32.lib Advapi32.lib Ole32.lib /out:tests\ControlMessageParsingTest.exe || exit /b 1
           tests\ControlMessageParsingTest.exe || exit /b 1
-          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\CpeProtocolAccelerationTest.cpp /Fe:tests\AccelerationTest.exe || exit /b 1
+          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\CpeProtocolAccelerationTest.cpp CpeProtocol.cpp /link /out:tests\AccelerationTest.exe || exit /b 1
           tests\AccelerationTest.exe || exit /b 1
-          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\CpeProtocolClearLockTest.cpp /Fe:tests\ClearLockTest.exe || exit /b 1
+          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\CpeProtocolClearLockTest.cpp CpeProtocol.cpp /link /out:tests\ClearLockTest.exe || exit /b 1
           tests\ClearLockTest.exe || exit /b 1
-          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\CpeProtocolSmsTest.cpp /Fe:tests\SmsTest.exe || exit /b 1
+          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\CpeProtocolSmsTest.cpp CpeProtocol.cpp /link /out:tests\SmsTest.exe || exit /b 1
           tests\SmsTest.exe || exit /b 1
-          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\SccParsingTest.cpp /Fe:tests\SccParsingTest.exe || exit /b 1
+          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\SccParsingTest.cpp /link /out:tests\SccParsingTest.exe || exit /b 1
           tests\SccParsingTest.exe || exit /b 1
 
       - name: Create release
