@@ -33,6 +33,8 @@ jobs:
           tests\SmsTest.exe || exit /b 1
           cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\SccParsingTest.cpp /link /out:tests\SccParsingTest.exe || exit /b 1
           tests\SccParsingTest.exe || exit /b 1
+          cl /nologo /utf-8 /std:c++17 /EHsc /I . tests\DailyLimitParsingTest.cpp /link /out:tests\DailyLimitParsingTest.exe || exit /b 1
+          tests\DailyLimitParsingTest.exe || exit /b 1
 
       - name: Create release
         shell: bash
