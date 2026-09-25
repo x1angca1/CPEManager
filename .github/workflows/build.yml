@@ -26,6 +26,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sha="${GITHUB_SHA::10}"
-          gh release create "build-${GITHUB_RUN_NUMBER}" CPEManager.exe CpeContractRate.dll \
+          gh release create "build-${GITHUB_RUN_NUMBER}" CPEManager.exe CpeContractRate.dll index.html acceleration-ui.js parameters-ui.js \
             --title "Build ${GITHUB_RUN_NUMBER} (${sha})" \
             --notes "Automated build from commit ${sha}."
